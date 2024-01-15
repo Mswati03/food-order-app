@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Navigation from './navigation/navigation';
+import { CartProvider } from './navigation/pages/cart/CartContext';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 function App() {
+  const initialOptions = {
+
+    "client-id" : "Abv4Ze_jLICRi1xMmOB1u1UMKXx7FevYLwvXaqDoYA-8AoNFzv9Ka8mM-vKoneHx_lTqVCMEgWhFe_oS",
+    currency : "USD",
+    intent : "capture",
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PayPalScriptProvider options={initialOptions}>
+    <CartProvider>
+      <Navigation/>
+    </CartProvider>
+    </PayPalScriptProvider>
   );
 }
 

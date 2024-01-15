@@ -1,0 +1,25 @@
+body{
+    padding-top: 0px;
+    display: flexbox;
+    background-color: #99D989;  
+    max-height: 100%;
+}
+h2{
+    font-size: 25px;
+    word-wrap: 'break-word';
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+}
+img{
+
+    max-width: 100%;
+}
+#Card{
+    background-color: #99D989;
+    border: 0;
+}
+#forgotpass{
+    float: right;
+}

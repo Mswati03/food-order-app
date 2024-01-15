@@ -1,0 +1,29 @@
+#wrapper{
+
+    background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147)); 
+}
+Form.Label{
+    color: 'black';
+    font-size: 12;
+    font-family: 'Inter';
+    font-weight: '400';
+    word-wrap: 'break-word'
+}
+#sign-up-logo{
+  height: auto
+
+}
+
+Card{
+    top: 60px;
+}
+
+h2{
+    font-size: 25px;
+    word-wrap: 'break-word';
+    
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+}
