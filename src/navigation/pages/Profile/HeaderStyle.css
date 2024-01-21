@@ -6,6 +6,7 @@ header .navbar {
   margin: 0;
   left: 0;
   top: 0;
+  
 }
 
 header .navbar.sticky {
@@ -111,4 +112,25 @@ header .roundpoint {
 }
 #profile-wrapper{
   margin-top: 100px;
+ width: 200px;
+ margin-left: 30px;
+ height: 400px;
     }
+    /* styles.css */
+
+#app {
+  margin-top: 100px;
+  position: absolute;
+  margin-left: 50px;
+  width: 80%;
+  height: max-content;
+}
+
+#MainContent{
+  flex: 1;
+  padding: 20px;
+
+}
+.div-wrapper{
+  display: inline-block;
+}

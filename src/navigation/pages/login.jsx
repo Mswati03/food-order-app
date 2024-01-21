@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./contexts/AuthContext"
 import { Link,  useNavigate } from "react-router-dom"
-import { getAuth } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import "./login.css";
 
 export default function Login() {
@@ -20,7 +20,24 @@ export default function Login() {
 
     if(await login(emailRef.current.value, passwordRef.current.value))
     {
-      navigate("/Dashboard");
+      var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function () {
+      x.className = x.className.replace("show", "");
+    }, 3000);
+  
+    const auth = getAuth();
+  
+    // Pass a reference to delayer function, don't invoke it immediately
+    setTimeout(delayer,3000);
+  
+    function delayer() {
+      
+          navigate("/Dashboard");
+          // Sign-out successful.
+        
+    }
+      
      
 
 }
@@ -35,7 +52,11 @@ export default function Login() {
   }
 
   return (
-    <>
+    <><div id="snackbar" style={{
+      position: 'fixed',
+      top: 0,
+      height: 60,  
+    }}>Logged In Successfully</div>
       <center><div id="login-logo">
         <img src="/images/login-logo-removebg.png" alt="sign-up-logo"/>
       </div>
