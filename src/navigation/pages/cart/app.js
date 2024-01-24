@@ -1,9 +1,11 @@
 import { useCart } from './CartContext';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 
 function Payment() {
   const { cartItems } = useCart();
-
-  window.paypal.Buttons({
+  const {db} = firebase.firestore();
+window.paypal.Buttons({
     style: {
       shape: 'rect',
       color: 'gold',
@@ -12,6 +14,10 @@ function Payment() {
     },
 
     createOrder: function (data, actions) {
+      db.collection("customersData").add({
+        name: 'thabo',
+        password: 'thabang'
+      });
       console.log("CREATE ORDER");
       const totalAmount = calculateTotalAmount(cartItems);
 
@@ -26,18 +32,46 @@ function Payment() {
         ],
       });
     },
+    
 
     onApprove: function (data, actions) {
+
+
+      db.collection("customersData").add({
+        name: 'thabo',
+        password: 'thabang'
+      });
       return actions.order.capture().then(function (details) {
         alert('Transaction completed by ' + details.payer.name.given_name + '!');
+
+        // Store payment information in Firestore
+        const paymentData = {
+          payerName: details.payer.name.given_name,
+          totalAmount: calculateTotalAmount(cartItems).toFixed(2),
+          items: cartItems.map(item => ({
+            title: item.title,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        };
+
+        db.collection('payments').add(paymentData)
+          .then(() => {
+            console.log('Payment information stored in Firestore.');
+          })
+          .catch(error => {
+            console.error('Error storing payment information:', error);
+          });
       });
     },
-
     onError: function (err) {
       console.log(err);
     },
   });
-}
+
+ 
+  
 
 function calculateTotalAmount(cartItems) {
   // Calculate the total amount based on the items in the cart
@@ -48,4 +82,5 @@ function calculateTotalAmount(cartItems) {
   return totalAmount;
 }
 
+}
 export default Payment;

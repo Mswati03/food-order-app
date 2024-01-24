@@ -8,14 +8,12 @@ import { useCart } from "../../../cart/CartContext";
 import Dropdown from 'react-bootstrap/Dropdown'; 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useAuth } from "../../../contexts/AuthContext";
 import { getAuth, signOut , onAuthStateChanged} from "firebase/auth";
-import Profile from "../../../Profile/Profile";
+
 
 
 const Header = () => {
-  const {logout} = useAuth();
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
   const { cart } = useCart();
@@ -105,7 +103,6 @@ return (
   <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
 </svg><span className="cart-count">{cart.length}</span>
               </Nav.Link>
-            
             <Dropdown>
               <Dropdown.Toggle variant="white" id="dropdown-basic">
                 <AccountCircleIcon/>
@@ -114,7 +111,7 @@ return (
               <Dropdown.Menu>
   
                 <Dropdown.Item onClick={userDetails}><AccountCircleIcon/>Account Details </Dropdown.Item>
-                <Dropdown.Item href="/cart"><ShoppingBagIcon/>My Orders </Dropdown.Item>
+                
                 <Dropdown.Item class="custom-toast success-toast"onClick={logOut}><LogoutIcon/>Log Out </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

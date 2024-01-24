@@ -4,9 +4,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { CartProvider, useCart } from './CartContext';
 import Paypal from '../checkout/PayPal';
 import { useState } from 'react';
-import PayPal from '../checkout/PayPal';
 import './cart.css';
-
 import Payment from './app';
 import Header from './Header';
 
@@ -14,10 +12,6 @@ import Header from './Header';
 function CartPage() {
   const [checkout, setCheckOut] = useState(false);
   const { cart, removeItem} = useCart();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-  }
 
 const handleRemoveItem = (index) => {
     removeItem(index);
@@ -63,9 +57,16 @@ const handleRemoveItem = (index) => {
       ) : (
         <Button  class="btn btn-primary"
           onClick={(e) => {
+            if(total==0.00)
+            {
+              alert("You need to add items to be able to checkout!");
+              return false;
+            } else{
             setCheckOut(true);
             alert("Scroll Below To Select Payment Options");
             <Payment/>
+            return true;
+            }
           }}
         >
           Checkout
