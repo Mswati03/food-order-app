@@ -33,6 +33,7 @@ export const CartProvider = ({ children }) => {
     const updatedCart = [...cart];
     updatedCart.splice(index, 1);
     setCart(updatedCart);
+    console.log('Item Removed');
   };
 
   return (

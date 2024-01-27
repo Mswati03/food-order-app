@@ -7,6 +7,7 @@ import { useState } from 'react';
 import './cart.css';
 import Payment from './app';
 import Header from './Header';
+import pap from './ap';
 
 
 function CartPage() {
@@ -18,6 +19,17 @@ const handleRemoveItem = (index) => {
   };
   const total = cart.reduce((acc, product) => acc + (product.price * (product.quantity || 1)), 0);
 
+  const formatProductToItem = (product) => {
+    return {
+      name: product.title,
+      unit_amount: {
+        currency_code: 'USD',
+        value: product.price.toFixed(2),
+      },
+    };
+  };
+  const itemsForPaypal = cart.map(formatProductToItem);
+ 
   return (
     <CartProvider>
      <Header/>
@@ -53,7 +65,7 @@ const handleRemoveItem = (index) => {
       
     <div className="text-center">
       {checkout ? (
-        <Paypal/>
+        <Paypal items={itemsForPaypal}/>
       ) : (
         <Button  class="btn btn-primary"
           onClick={(e) => {
@@ -64,7 +76,7 @@ const handleRemoveItem = (index) => {
             } else{
             setCheckOut(true);
             alert("Scroll Below To Select Payment Options");
-            <Payment/>
+            <pap/>
             return true;
             }
           }}

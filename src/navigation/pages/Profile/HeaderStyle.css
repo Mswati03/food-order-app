@@ -1,13 +1,20 @@
 /* Header CSS */
+#ConTaiNer{
+  width: 1708px;
+  position: relative;
+  display: flex;
+  height: 95px;
+}
+
 header .navbar {
   position: relative;
   background-color: white;
-  z-index: 1000;
+  max-width: 9000px;
   margin: 0;
-  left: 0;
-  top: 0;
-  
+  padding: 0;
+  display: flex;
 }
+
 
 header .navbar.sticky {
   position: fixed;
