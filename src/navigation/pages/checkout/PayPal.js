@@ -51,7 +51,7 @@ function PayPal({ items }) {
     
     console.log(items);
    db.collection("orders").add({
-    items
+    items,
    }).then(( docRef)=>{
     const docId= docRef.id;
     console.log(docId);

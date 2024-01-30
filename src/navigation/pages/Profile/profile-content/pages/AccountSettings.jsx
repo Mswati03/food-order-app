@@ -58,7 +58,7 @@ const AccountSettings = () => {
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputZip5">Zip</label>
-                        <input type="text" class="form-control" id="inputZip5" placeholder="98232" />
+                        <input type="text" class="form-control" id="inputZip5" placeholder="98232"/>
                     </div>
                 </div>
                 <hr class="my-4" />
@@ -66,15 +66,15 @@ const AccountSettings = () => {
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="inputPassword4">Old Password</label>
-                            <input type="password" class="form-control" id="inputPassword5" />
+                            <input type="password" class="form-control" id="current-password"/>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword5">New Password</label>
-                            <input type="password" class="form-control" id="inputPassword5" />
+                            <input type="password" class="form-control" id="new-password"/>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword6">Confirm Password</label>
-                            <input type="password" class="form-control" id="inputPassword6" />
+                            <input type="password" class="form-control" id="new-password-confirm"/>
                         </div>
                     </div>
                     <div class="col-md-6">

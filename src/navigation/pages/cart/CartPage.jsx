@@ -22,10 +22,8 @@ const handleRemoveItem = (index) => {
   const formatProductToItem = (product) => {
     return {
       name: product.title,
-      unit_amount: {
-        currency_code: 'USD',
-        value: product.price.toFixed(2),
-      },
+      value: product.price.toFixed(2),
+      
     };
   };
   const itemsForPaypal = cart.map(formatProductToItem);
