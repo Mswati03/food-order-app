@@ -24,6 +24,7 @@ const OrderHistory = () => {
         newOrders.push({ id: doc.id, ...doc.data() });
       });
       setOrders(newOrders);
+      console.log(newOrders);
     });
 
     // Cleanup function to unsubscribe when the component unmounts
@@ -31,7 +32,57 @@ const OrderHistory = () => {
       unsubscribe();
     };
   }, []);
+  
+    const data = [
+      {
+        "id": "M4XYqyFEIZdFvxLkNgvY",
+        "items": [
+          {
+            "name": "Vegan Burger",
+            "unit_amount": {
+              "value": "99.25",
+              "currency_code": "USD"
+            }
+          }
+        ]
+      },
+      {
+        "id": "NQVvk2JVy1exZzRwevTy",
+        "items": [
+          {
+            "value": "99.32",
+            "name": "Saucy Dunked Burger"
+          }
+        ]
+      },
+      {
+        "id": "gcar9nbdi9KxCY5kL4fV",
+        "items": [
+          {
+            "unit_amount": {
+              "currency_code": "USD",
+              "value": "59.25"
+            },
+            "name": "Double Burger"
+          }
+        ]
+      },
+      {
+        "id": "jXbFfTx3fE9Rp4FkXS82",
+        "items": [
+          {
+            "value": "99.32",
+            "name": "Saucy Dunked Burger"
+          }
+        ]
+      }
+    ];
+    
+   
+    
 
+    
+  
   return (
     <div>
       <h1>Order History</h1>
@@ -39,21 +90,20 @@ const OrderHistory = () => {
         <thead>
           <tr>
             <th>Order ID</th>
+            <th>Order Name</th>
             <th>Date</th>
-            <th>Total</th>
-            <th>Status</th>
+            <th>Amount</th>
           </tr>
         </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
-              <td>{order.id}</td>
-              <td>457</td>
-              <td>$10</td>
-              <td>{order.id}</td>
-            </tr>
-          ))}
+        <tbody id="tbody">
+          <td></td>
         </tbody>
+        <td>{data[0].id}</td>
+        <td>
+          {data[0].items[0].name}
+        </td>
+        <td>{data[0].items[0].unit_amount.value}</td>
+        <td>{data[0].items[0].unit_amount.value}</td>
       </table>
     </div>
   );

@@ -4,6 +4,7 @@ import { useAuth } from "./contexts/AuthContext"
 import { Link,  useNavigate } from "react-router-dom"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import "./login.css";
+import ReactLoading from "react-loading";
 
 export default function Login() {
   const emailRef = useRef()
@@ -57,6 +58,7 @@ export default function Login() {
       top: 0,
       height: 60,  
     }}>Logged In Successfully</div>
+    
       <center><div id="login-logo">
         <img src="/images/login-logo-removebg.png" alt="sign-up-logo"/>
       </div>
