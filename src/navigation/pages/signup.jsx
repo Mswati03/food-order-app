@@ -4,21 +4,68 @@ import { useAuth } from "./contexts/AuthContext";
 import { useNavigate,Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./sign-up.css";
+import {addDoc, collection, getDocs,where, query} from 'firebase/firestore'
+import firebase from "firebase/compat/app";
+import { ClipLoader } from "react-spinners";
+import { LocalAtmSharp } from "@mui/icons-material";
 
+const LoadingWidget = ({ isLoading }) => {
+  return (
+    <div className={`loading-widget ${isLoading ? 'visible' : ''}`}>
+      <div className="loading-spinner"></div>
+      <p>Loading...</p>
+    </div>
+  );
+};
 
  function Signup() {
+  
+  const db = firebase.firestore();
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
-
+  const dbref = collection(db, "customers")
+  const [emailID , setEmailID]= useState("")
+  const [passcode, setPassCode] = useState("")
+  
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault() 
+    
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    
+    setLoading(true);  
+    const docRef = await addDoc(collection(db, "customers"), {
+      email: emailID,
+      password: passcode,
+    });
+    alert('user registered successfully');
+    navigate('/Login');
+    
+   
+   /*const matchEmail = query(dbref, where('email', '==', emailRef))
+    try{
+      const snapshot = await getDocs(matchEmail)
+      const emailMatchingArray = snapshot.docs.map((doc) => doc.data())
+
+      if(emailMatchingArray>1)
+      {
+        alert("Email ID already exists")
+      }
+      else{
+        await addDoc("customers", { email : emailRef , password: passwordRef})
+        navigate("/Login");
+      }
+    }
+    catch(error)
+    {
+      alert(error);
+    }
+     
+    /*if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
 
@@ -32,7 +79,7 @@ import "./sign-up.css";
       else{
         setError("Failed to Sign Up")
       }
-      setLoading(false)
+      setLoading(false)*/
   }
 
   return (
@@ -44,19 +91,20 @@ import "./sign-up.css";
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>EMAIL</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control type="email" ref={emailRef} onChange={(e)=>{setEmailID(e.target.value)}} required />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>PASSWORD</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Control type="password" ref={passwordRef} onChange={(e)=>{setPassCode(e.target.value)}}required />
             </Form.Group>
             <Form.Group id="password-confirm">
               <Form.Label>PASSWORD CONFIRMATION</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              Sign Up
+              Sign up
             </Button>
+            
           </Form>
         </Card.Body>
       </Card>

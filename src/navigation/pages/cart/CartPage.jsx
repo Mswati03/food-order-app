@@ -8,11 +8,21 @@ import './cart.css';
 import Payment from './app';
 import Header from './Header';
 import pap from './ap';
+import { useEffect } from 'react';
 
 
 function CartPage() {
   const [checkout, setCheckOut] = useState(false);
   const { cart, removeItem} = useCart();
+  var [date,setDate] = useState(new Date());
+    
+    useEffect(() => {
+        var timer = setInterval(()=>setDate(new Date()), 1000 )
+        return function cleanup() {
+            clearInterval(timer)
+        }
+    
+    });
 
 const handleRemoveItem = (index) => {
     removeItem(index);
@@ -21,8 +31,15 @@ const handleRemoveItem = (index) => {
 
   const formatProductToItem = (product) => {
     return {
+      dateoforder : date.toLocaleDateString(),
       name: product.title,
-      value: product.price.toFixed(2),
+      unit_amount :{
+        value: product.price.toFixed(2),
+        currency_code : "USD",
+        
+      }
+
+      
       
     };
   };
