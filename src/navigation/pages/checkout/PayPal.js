@@ -1,13 +1,16 @@
 
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import React from "react";
+import React, { useState } from "react";
 
 function PayPal({ items }) {
   const db= firebase.firestore();
   const serverUrl ="http://localhost:8888/"; 
+  const auth = getAuth();
+
+  const user = auth.currentUser;
  /* const createOrder = (data) => {
     // Order is created on the server and the order id is returned
     var fetch = require('node-fetch');
@@ -48,9 +51,15 @@ function PayPal({ items }) {
   };*/
   const handleButtonClick = (event) => {
     console.log('PayPal button clicked');
+    if(user){
+    
+      
+      const uid = user.uid;;
+    
     
     console.log(items);
-   db.collection("orders").add({
+    console.log(user.id);
+   db.collection("customers").doc(uid).collection("orders").add({
     items,
    }).then(( docRef)=>{
     const docId= docRef.id;
@@ -60,7 +69,10 @@ function PayPal({ items }) {
     console.error("Error adding order to Firestore: ", error);
   });
 
-    
+} else{
+  alert("error")
+return false;
+}
 
   }
   

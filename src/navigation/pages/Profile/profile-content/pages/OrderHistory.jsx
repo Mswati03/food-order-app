@@ -7,7 +7,8 @@ import { getAuth } from "firebase/auth";
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const newOrders = [];
-
+  const auth = getAuth();
+  const user = auth.currentUser;
   useEffect(() => {
     // Fetch orders data from your backend or API
     // For simplicity, I'll use dummy data here
@@ -18,9 +19,10 @@ const OrderHistory = () => {
     ];
 
     setOrders(dummyOrders);*/
+    const uid=user.uid;
 
     // Set up real-time listener for Firestore
-    const unsubscribe = firebase.firestore().collection('orders').onSnapshot((querySnapshot) => {
+      const unsubscribe = firebase.firestore().collection('customers').doc(uid).collection('orders').onSnapshot((querySnapshot) => {
       const newOrders = [];
       querySnapshot.forEach((doc) => {
         newOrders.push({ id: doc.id, ...doc.data() });

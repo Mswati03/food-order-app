@@ -10,6 +10,7 @@ import PaymentInfo from './profile-content/pages/PaymentInfo';
 import CustomerSupport from './profile-content/pages/CustomerSupport';
 import AccountSettings from './profile-content/pages/AccountSettings';
 import OrderHistory from './profile-content/pages/OrderHistory';
+import UserLogo from '../../../images/user (2).png';
 
 
 const Profile =( )=> {
@@ -85,7 +86,7 @@ const Profile =( )=> {
     <div id='profile-wrapper' className='div-wrapper' style={{ background: '#FFFEFE', borderRadius: 20}}>
       {userDetails ? (
         <div className="cardd">
-          <img style={{width: '64px', height: '64px', borderRadius: 9999, marginLeft:70, marginTop:20}} src="https://via.placeholder.com/64x64"/>
+          <img style={{width: '64px', height: '64px', borderRadius: 9999, marginLeft:70, marginTop:20}} src={UserLogo}/>
           <div className="card-body">
           
           {/* display user info and settings options in the profile */}

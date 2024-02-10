@@ -13,20 +13,23 @@ export default function Login() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const auth = getAuth();
+  const [password, setPassCode] = useState("");
+  const [email , setEmailID] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault()
     setError("")
     setLoading(true)
 
-    if(await login(emailRef.current.value, passwordRef.current.value))
-    {
-      var x = document.getElementById("snackbar");
+    signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+     var x = document.getElementById("snackbar");
     x.className = "show";
     setTimeout(function () {
       x.className = x.className.replace("show", "");
     }, 3000);
-  
+  // Signed in 
     const auth = getAuth();
   
     // Pass a reference to delayer function, don't invoke it immediately
@@ -39,19 +42,21 @@ export default function Login() {
         
     }
       
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert ('Failed to Login because of wrong credentials');
+  });
      
+    
+    setLoading(false) 
 
 }
     
     
-   else {
-    alert("You have entered wrong credentials");
-      setError("Failed to log in")
-    }
-
-    setLoading(false)
-  }
-
+ 
   return (
     <><div id="snackbar" style={{
       position: 'fixed',
@@ -68,13 +73,13 @@ export default function Login() {
           <h2 className="text-center">INSTANT EATS</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group  className="mb-3"id="email">
+            <Form.Group  className="mb-3"id="email" >
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control type="email" ref={emailRef} onChange={(e)=>{setEmailID(e.target.value)}} required />
             </Form.Group>
             <Form.Group className="mb-3"id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Control type="password" ref={passwordRef} onChange={(e)=>{setPassCode(e.target.value)}}required />
             </Form.Group>
            <center> <Button disabled={loading} className=" w-50" type="submit">
               Log In
