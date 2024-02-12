@@ -8,6 +8,7 @@ import {addDoc, collection, getDocs,where, query} from 'firebase/firestore'
 import firebase from "firebase/compat/app";
 import { ClipLoader } from "react-spinners";
 import { LocalAtmSharp } from "@mui/icons-material";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const LoadingWidget = ({ isLoading }) => {
   return (
@@ -38,10 +39,26 @@ const LoadingWidget = ({ isLoading }) => {
 
     
     setLoading(true);  
-    const docRef = await addDoc(collection(db, "customers"), {
+    if(await addDoc(collection(db, "customers"), {
       email: emailID,
       password: passcode,
-    });
+    }))
+    {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, emailID, passcode)
+      .then(() => {
+       alert('user registered successfully');
+       navigate('/Login');
+      })
+      .catch((error) => {
+      
+        console.log(error); 
+        return false;   
+      });}
+      else{
+        console.log("error");
+      }
+
     alert('user registered successfully');
     navigate('/Login');
     

@@ -1,6 +1,9 @@
 import React from 'react';
 import "./AccountSettings.css";
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 const AccountSettings = () => {
+    const navigate= useNavigate();
   return (
     <div class="container">
 <div class="row justify-content-center">
@@ -61,24 +64,18 @@ const AccountSettings = () => {
                         <input type="text" class="form-control" id="inputZip5" placeholder="98232"/>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Save Change</button>
                 <hr class="my-4" />
                 <div class="row mb-4">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="inputPassword4">Old Password</label>
-                            <input type="password" class="form-control" id="current-password"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword5">New Password</label>
-                            <input type="password" class="form-control" id="new-password"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword6">Confirm Password</label>
-                            <input type="password" class="form-control" id="new-password-confirm"/>
-                        </div>
+                        <p>To create a new password of your account, press on the button below</p><br/>
+                        <Button variant='danger' onClick={()=>{
+                        navigate('/forgot-password');
+                        }}>
+                            Reset Password</Button>
                     </div>
                     <div class="col-md-6">
-                        <p class="mb-2">Password requirements</p>
+                        <b><p class="mb-2">Remember the password requirements</p></b>
                         <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
                         <ul class="small text-muted pl-4 mb-0">
                             <li>Minimum 8 character</li>
@@ -88,7 +85,7 @@ const AccountSettings = () => {
                         </ul>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Save Change</button>
+              
             </form>
         </div>
     </div>

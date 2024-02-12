@@ -4,7 +4,7 @@ import { useAuth } from "./contexts/AuthContext"
 import { Link } from "react-router-dom"
 import "./forgotpass.css"
 
-export default function ForgotPassword() {
+export default function ForgotPassword(){
   const emailRef = useRef()
   const { resetPassword } = useAuth()
   const [error, setError] = useState("")
@@ -53,9 +53,9 @@ export default function ForgotPassword() {
       </Card>
       <center>
       <div id="img-forgotp">
-        <img src="/images/forgot-pass-logo.png" alt="forgot-pass"/>
+      <img src="/images/forgot-pass-logo.png" alt="forgot-pass"/>
       </div>
-      <p className="text-center">2023 Instant Eats © . All Rights Reserved</p>
+      <p className="text-center">2023 Instant Eats ©.All Rights Reserved</p>
       </center>
       </div>
   );

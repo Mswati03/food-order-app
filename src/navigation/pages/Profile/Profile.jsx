@@ -13,7 +13,7 @@ import OrderHistory from './profile-content/pages/OrderHistory';
 import UserLogo from '../../../images/user (2).png';
 
 
-const Profile =( )=> {
+const Profile = () => {
   const [userDetails, setUserDetails] = useState(null);
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -83,51 +83,47 @@ const Profile =( )=> {
       <Header/>
     </div>
     
-    <div id='profile-wrapper' className='div-wrapper' style={{ background: '#FFFEFE', borderRadius: 20}}>
+    <div id='profile-wrapper' className='div-wrapper' style={{ background: '#FFFEFE',  width: 'fit-content', borderRadius: 20}}>
       {userDetails ? (
-        <div className="cardd">
-          <img style={{width: '64px', height: '64px', borderRadius: 9999, marginLeft:70, marginTop:20}} src={UserLogo}/>
-          <div className="card-body">
-          
+        <div className="cardd" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',  width: 'fit-content' }}>
+        <img style={{ width: '64px', height: '64px', borderRadius: 9999, marginTop: 20 }} src={UserLogo} />
+        <div className="card-body" style={{ marginTop: 20 }}>
           {/* display user info and settings options in the profile */}
-          <div 
-          style={{
-            color: 'black', 
-            fontSize: 18, 
-            fontFamily: 'Inter', 
-            fontWeight: '400', 
-            wordWrap: 'break-word', 
-            marginTop:20, 
-            marginLeft:10,
-            }}>{userDetails.email}
+          <div
+            style={{
+              color: 'black',
+              fontSize: 18,
+              fontFamily: 'Inter',
+              fontWeight: '400',
+              wordWrap: 'break-word',
+              textAlign: 'center',
+              marginBottom: 20,
+            }}>
+            {userDetails.email}
+          </div>
+          {/*Displaying the buttons in a map to precisely display each and its info and exact function addressing upon click*/}
+          {items.map((item) => (
+            <div key={item.id} style={{ marginBottom: 14 ,alignItems: 'center',}}>
+              <button className="btn btn-sm" onClick={() => handleItemClick(item)}>
+                {item.icon} {item.title}
+              </button>
             </div>
-            {/*Displaying the buttons in a map to precisely display each and its info and exact function addressing upon click*/}
-            {items.map((item) => (
-            <div key={item.id} 
-            style={{ 
-            color: '#060303',
-            fontSize: 15,
-            fontFamily: 'Inter',
-            fontWeight: '400',
-            wordWrap: 'break-word',
-            marginTop:14,
-            marginLeft:20 }}>
-            <button className="btn btn-sm" onClick={() => handleItemClick(item)}>
-            {item.icon} {item.title}
-            </button>
-            </div>
-            ))}
-            <div>
-            <Button style={{
-              background: '#FF6060',
-              marginTop:20,
-              marginLeft: 55,
-              borderRadius: 5}} onClick={logOut}>
-                Log Out</Button>
-            </div>
-            
+          ))}
+          <div>
+            <center><Button
+              style={{
+                background: '#FF6060',
+                borderRadius: 5,
+                width: 'fit-content', // Ensure button width fits its content
+              }}
+              onClick={logOut}>
+              Log Out
+            </Button>
+            </center>
           </div>
         </div>
+      </div>
+      
       ) : (
         <p>No user signed in</p>
       )}

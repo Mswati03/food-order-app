@@ -7,7 +7,7 @@ import Login from "./pages/login";
 import ForgotPassword from "./pages/forgotpassword";
 
 import HomeDash from "./pages/dashboard/pages/Home/Home";
-import CartPage from "./pages/cart/CartPage";
+import CartPage from "./pages/cart/CartPage.tsx";
 import { CartProvider } from "./pages/cart/CartContext";
 import Profile from "./pages/Profile/Profile";
 

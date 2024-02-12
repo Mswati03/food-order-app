@@ -2,10 +2,7 @@
 
 #home-container{
   font-family: "Inter", sans-serif;
-  padding-right: 200px;
-            margin-top: 0px;
-            margin-left: 0px;
-            width: 100%;
+  width: 100%;
 }
 /* Home Hero 1.0 */
 .hero_section {

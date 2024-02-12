@@ -1,5 +1,8 @@
 // CartPage.js
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from './CartState/store';
+import { decrement, increment } from './CartState/Counter/CounterSlice.ts';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { CartProvider, useCart } from './CartContext';
 import Paypal from '../checkout/PayPal';
@@ -7,7 +10,7 @@ import { useState } from 'react';
 import './cart.css';
 import Payment from './app';
 import Header from './Header';
-import pap from './ap';
+
 import { useEffect } from 'react';
 
 
@@ -15,6 +18,8 @@ function CartPage() {
   const [checkout, setCheckOut] = useState(false);
   const { cart, removeItem} = useCart();
   var [date,setDate] = useState(new Date());
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch<AppDispatch>();
     
     useEffect(() => {
         var timer = setInterval(()=>setDate(new Date()), 1000 )
@@ -63,7 +68,11 @@ const handleRemoveItem = (index) => {
               <h3>{product.title}</h3>
               <p>{product.paragraph}</p>
               <div>
-                <span>{product.quantity}</span>
+                <span>{count}</span>
+      
+              <Button onClick={() => dispatch(increment())}>Increment</Button>
+              <Button onClick={() => dispatch(decrement())}>Decrement</Button>
+      
                 <Button variant="danger" onClick={() => handleRemoveItem(index)}>
                   Remove
                 </Button>
@@ -82,7 +91,7 @@ const handleRemoveItem = (index) => {
       {checkout ? (
         <Paypal items={itemsForPaypal}/>
       ) : (
-        <Button  class="btn btn-primary"
+        <Button  className="btn btn-primary"
           onClick={(e) => {
             if(total==0.00)
             {
@@ -91,7 +100,7 @@ const handleRemoveItem = (index) => {
             } else{
             setCheckOut(true);
             alert("Scroll Below To Select Payment Options");
-            <pap/>
+            //<pap/>
             return true;
             }
           }}
