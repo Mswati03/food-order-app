@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App';
 import { Provider } from 'react-redux';
-import { store } from './navigation/pages/cart/CartState/store.ts';
+import {store} from './CartState/store.ts';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store()}>
+  <Provider store={store}>
   <React.StrictMode>
     <App />
   </React.StrictMode>

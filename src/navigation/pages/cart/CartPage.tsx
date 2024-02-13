@@ -1,8 +1,8 @@
 // CartPage.js
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from './CartState/store';
-import { decrement, increment } from './CartState/Counter/CounterSlice.ts';
+import { AppDispatch } from '../../../CartState/store.ts';
+import { decrement , increment} from '../../../CartState/Counter/CounterSlice.ts';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { CartProvider, useCart } from './CartContext';
 import Paypal from '../checkout/PayPal';
@@ -62,22 +62,34 @@ const handleRemoveItem = (index) => {
       <h2>Your Cart</h2>
       <Row>
         {cart.map((product, index) => (
+          
           <Col key={index} md={4}>
             <div>
               <img src={product.image}  className= "rounded"alt={product.title} />
               <h3>{product.title}</h3>
               <p>{product.paragraph}</p>
-              <div>
-                <span>{count}</span>
+              <div><br/>
+              Qty {' '} <span>{count}</span><br/>
+
       
-              <Button onClick={() => dispatch(increment())}>Increment</Button>
-              <Button onClick={() => dispatch(decrement())}>Decrement</Button>
+              <Button onClick={() => dispatch(increment())}>Increment</Button>{' '}
+              <Button onClick={() => 
+                { if(count>=1)
+                  {
+                     dispatch(decrement());
+                     handleRemoveItem(index);
+                  }
+                 else{
+                  return false;
+                 }
+                  }
+                }>Decrement</Button>
       
-                <Button variant="danger" onClick={() => handleRemoveItem(index)}>
+      {' '}<br/><Button variant="danger" onClick={() => handleRemoveItem(index)}>
                   Remove
                 </Button>
               </div>
-              <p>Price: R{product.price}</p>
+              <p>Price: R{product.price * count}</p>
             </div>
           </Col>
         ))}
