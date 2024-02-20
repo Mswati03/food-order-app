@@ -58,7 +58,7 @@ function PayPal({ items }) {
     
     
     console.log(items);
-    console.log(user.id);
+    console.log(uid);
    db.collection("customers").doc(uid).collection("orders").add({
     items,
    }).then(( docRef)=>{

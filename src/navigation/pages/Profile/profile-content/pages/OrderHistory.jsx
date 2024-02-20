@@ -94,10 +94,13 @@ const OrderHistory = () => {
       <table>
         <thead>
           <tr>
+            <th>Date</th>
             <th>Order ID</th>
             <th>Order Name</th>
-            <th>Amount</th>
-            <th>Date</th>
+            <th>Quantinty</th>
+            <th>Unit</th>
+            <th>Total</th>
+            
           </tr>
         </thead>
         <tbody id="tbody">
@@ -107,14 +110,16 @@ const OrderHistory = () => {
             {order.items && Array.isArray(order.items) && order.items.length > 0 ? (
               order.items.map((item, index) => (
                 <tr key={`${order.id}_${index}`}>
+                  <td>{item.dateoforder}</td>
                   {index === 0 && 
                   <td rowSpan={order.items.length}>
                     {order.id}
                   </td>
                   }
                   <td>{item.name}</td>
+                  <td>{item.count}</td>
                   <td>{item.unit_amount && item.unit_amount.value}</td>
-                  <td>{item.dateoforder}</td>
+                  <td>{item.count * item.unit_amount.value}</td>
                 </tr>
               ))
             ) : (

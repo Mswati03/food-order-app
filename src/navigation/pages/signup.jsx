@@ -37,16 +37,18 @@ const LoadingWidget = ({ isLoading }) => {
     e.preventDefault() 
     
 
-    
+  const auth = getAuth();
     setLoading(true);  
-    if(await addDoc(collection(db, "customers"), {
+    if(createUserWithEmailAndPassword(auth, emailID, passcode)){
+      
+      const user = auth.currentUser;
+      if(user){
+        const uid =user.uid;
+        console.log(uid);
+      await addDoc(collection(db, "customers",uid), {
       email: emailID,
       password: passcode,
-    }))
-    {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, emailID, passcode)
-      .then(() => {
+    }).then(() => {
        alert('user registered successfully');
        navigate('/Login');
       })
@@ -54,7 +56,9 @@ const LoadingWidget = ({ isLoading }) => {
       
         console.log(error); 
         return false;   
-      });}
+      })
+    }
+    }
       else{
         console.log("error");
       }

@@ -12,6 +12,7 @@ import Payment from './app';
 import Header from './Header';
 
 import { useEffect } from 'react';
+import { Delete, Garage, Remove } from '@mui/icons-material';
 
 
 function CartPage() {
@@ -32,17 +33,19 @@ function CartPage() {
 const handleRemoveItem = (index) => {
     removeItem(index);
   };
-  const total = cart.reduce((acc, product) => acc + (product.price * (product.quantity || 1)), 0);
+  const total = cart.reduce((acc, product) => acc + (product.price * count * (product.quantity || 1)), 0);
 
   const formatProductToItem = (product) => {
     return {
       dateoforder : date.toLocaleDateString(),
+      count : count,
       name: product.title,
       unit_amount :{
         value: product.price.toFixed(2),
         currency_code : "USD",
         
-      }
+      },
+      total : total,
 
       
       
@@ -54,42 +57,43 @@ const handleRemoveItem = (index) => {
     <CartProvider>
      <Header/>
         <Container id='home-container' >
-          <Button className='text-left'>
-            <a href="Dashboard" className='pull-left' style={{color:'white'}}> 
-             ~Back
-            </a>
-            </Button>
+          
       <h2>Your Cart</h2>
       <Row>
         {cart.map((product, index) => (
           
-          <Col key={index} md={4}>
+          <Col key={index} md={3}>
             <div>
-              <img src={product.image}  className= "rounded"alt={product.title} />
+             <img src={product.image} id='cart-image' className= "rounded"alt={product.title} />
               <h3>{product.title}</h3>
               <p>{product.paragraph}</p>
               <div><br/>
-              Qty {' '} <span>{count}</span><br/>
+              Qty:{' '} <span>{count}</span> {' '}unit(s)<br/>
 
       
-              <Button onClick={() => dispatch(increment())}>Increment</Button>{' '}
+              <Button onClick={() => dispatch(increment())}>+</Button>{' '}
               <Button onClick={() => 
-                { if(count>=1)
+                { if(count>1)
                   {
                      dispatch(decrement());
-                     handleRemoveItem(index);
+                     if(count==1){
+                      handleRemoveItem(index);
+                     }
+                     else{
+                      return false;
+                     }
                   }
                  else{
                   return false;
                  }
                   }
-                }>Decrement</Button>
+                }>-</Button>
       
       {' '}<br/><Button variant="danger" onClick={() => handleRemoveItem(index)}>
-                  Remove
+                  <Delete/>
                 </Button>
               </div>
-              <p>Price: R{product.price * count}</p>
+              <p>Price: R{(product.price * count).toFixed(2)}</p>
             </div>
           </Col>
         ))}
