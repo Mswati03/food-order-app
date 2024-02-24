@@ -71,7 +71,7 @@ const handleRemoveItem = (index) => {
               Qty:{' '} <span>{count}</span> {' '}unit(s)<br/>
 
       
-              <Button onClick={() => dispatch(increment())}>+</Button>{' '}
+             
               <Button onClick={() => 
                 { if(count>1)
                   {
@@ -87,7 +87,8 @@ const handleRemoveItem = (index) => {
                   return false;
                  }
                   }
-                }>-</Button>
+                }>-</Button> {' '}
+                <Button onClick={() => dispatch(increment())}>+</Button>
       
       {' '}<br/><Button variant="danger" onClick={() => handleRemoveItem(index)}>
                   <Delete/>
