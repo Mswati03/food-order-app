@@ -9,6 +9,9 @@ import Section5 from "./Section5";
 import Section6 from "./Section6";
 import Section7 from "./Section7";
 import ChatBot from "./dashboard-chat";
+import Review from "./review";
+import SimpleForm from "../SimpleForm";
+
 
 const HomeDash = () => {
   return (
@@ -35,7 +38,7 @@ const HomeDash = () => {
 
         {/* Home Section Contact */}
         <Section7 />
-        <ChatBot/>
+        <SimpleForm/>
       </Layout>
      
     </div>

@@ -1,20 +1,8 @@
 //App.js
 
 import ChatBot from 'react-simple-chatbot';
-import { ThemeProvider } from 'styled-components';
-import Review from '../Review';
-import { Component } from 'react';
 
-const step = [
-	{
-		id: '0',
-		message: 'Please leave a review!',
 
-		// This calls the next id
-		// i.e. id 1 in this case
-			}, 
-            
-];
 
 // Creating our own theme
 const theme = {
@@ -29,57 +17,61 @@ const theme = {
 };
 
 // Set some properties of the bot
-const config = {
-	
-	floating: true,
-};
-class Chatbot extends Component {
-	render() {
-        return (
-            <ChatBot
 
-					// This appears as the header
-					// text for the chat bot
-					headerTitle="Instant Eats Bot"
-                    steps={[
-                        {
-                            id: '1',
-                            message: 'What is your email?',
-                            trigger: 'email',
-                        },
-                        {
-                            id: 'email',
-                            user: true,
-                            trigger: '3',
-                        },
-                        {
-                            id: '3',
-                            message: 'Hi {previousValue}! Leave a review',
-                            trigger: 'review',
-                        },
-                        {
-                            id: 'review',
-                            message: 'Great! Check out your summary',
-                            trigger: 'review',
-                        },
-                        {
-                            id: 'review',
-                            component: <Review />,
-                            asMessage: true,
-                            trigger: 'end-message',
-                        },
-                        {
-                            id: 'end-message',
-                            message: 'Thanks! Your data was submitted successfully!',
-                            end: true,
-                        },
-                    ]}
-					{...config}
+function Chatbot (){
+    const randomNumber = Math.floor(Math.random() * 3) + 1; // Generate a random number between 1 and 3
 
-				/>
-			
-	
-	);
-}
+    const wrongAnswers = [
+        "Wrong answer, try again.",
+        "Oops, that's not it. Give it another shot.",
+        "Not quite. Guess again!"
+    ];
+
+    return (
+        <ChatBot
+            steps={[
+                {
+                    id: '1',
+                    message: 'What is your name?',
+                    trigger: '2',
+                },
+                {
+                    id: '2',
+                    user: true,
+                    trigger: '3',
+                },
+                {
+                    id: '3',
+                    message: 'Hi {previousValue}, nice to meet you!',
+                    trigger: '4',
+                },
+                {
+                    id: '4',
+                    message: 'What number am I thinking?',
+                    trigger: '5',
+                },
+                {
+                    id: '5',
+                    options: [
+                        { value: 1, label: 'Number 1', trigger: randomNumber === 1 ? '7' : '6' },
+                        { value: 2, label: 'Number 2', trigger: randomNumber === 2 ? '7' : '6' },
+                        { value: 3, label: 'Number 3', trigger: randomNumber === 3 ? '7' : '6' },
+                    ],
+                },
+                {
+                    id: '6',
+                    message: wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)],
+                    trigger: '5',
+                },
+                {
+                    id: '7',
+                    message: 'Awesome! You are a telepath!',
+                    end: true,
+                },
+            ]}
+            floating={true}
+            optionStyle={{ fontSize: '20px', padding: '10px', margin: '5px' }} // Styling for options
+        />
+    );
 }
 export default Chatbot;

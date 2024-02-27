@@ -59,7 +59,7 @@ const CustomerSupport = () =>
               }, (error) => {
                   console.log(error.text);
               });
-              e.target.reset();
+             
               document.body.classList.add("sent");
           }
               

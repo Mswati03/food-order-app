@@ -10,6 +10,8 @@ import HomeDash from "./pages/dashboard/pages/Home/Home";
 import CartPage from "./pages/cart/CartPage.tsx";
 import { CartProvider } from "./pages/cart/CartContext";
 import Profile from "./pages/Profile/Profile";
+import Review from "./pages/dashboard/pages/Home/review.jsx";
+import SimpleForm from "./pages/dashboard/pages/SimpleForm.jsx";
 
 
 const Navigation = () => {
@@ -25,6 +27,7 @@ const Navigation = () => {
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
                 <Route path="/cart" element={<CartPage/>}/>
                 <Route path="/user-profile" element={<Profile/>}/>
+                <Route path="/review" element={<SimpleForm/>}/>
             </Routes>
         </BrowserRouter>
         </AuthProvider>

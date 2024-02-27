@@ -19,6 +19,9 @@ function Section7() {
             <Link to="" className="btn btn_red px-4 py-2 rounded-0">
               Call: +266 27000064
             </Link>
+            <Link to="/review" className="btn btn_red px-4 py-2 rounded-0">
+              Leave a review
+            </Link>
           </Col>
         </Row>
       </Container>

@@ -16,18 +16,7 @@ const AccountSettings = () => {
                 </li>
             </ul>
             <form>
-                <div class="row mt-5 align-items-center">
-                   <center> <div class="col-md-3 text-center mb-5">
-                        <div class="avatar avatar-xl">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
-                        </div>
-                    </div></center>
-                    <div class="col">
-                        <div class="row align-items-center">
-                            
-                        </div>
-                    </div>
-                </div>
+                
                 <hr class="my-4" />
                 <div class="form-row">
                     <div class="form-group col-md-6">

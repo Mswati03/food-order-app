@@ -7,21 +7,21 @@ class Review extends Component {
         super(props);
 
         this.state = {
-            email: '',
-            review: '',
-          
+            name: '',
+            gender: '',
+            age: '',
         };
     }
 
     componentWillMount() {
         const { steps } = this.props;
-        const { email, review} = steps;
+        const { name, gender, age } = steps;
 
-        this.setState({ email, review});
+        this.setState({ name, gender, age });
     }
 
     render() {
-        const { email, review} = this.state;
+        const { name, gender, age } = this.state;
         return (
             <div style={{ width: '100%' }}>
                 <h3>Summary</h3>
@@ -29,12 +29,15 @@ class Review extends Component {
                     <tbody>
                         <tr>
                             <td>Name</td>
-                            <td>{email.text}</td>
+                            <td>{name.value}</td>
                         </tr>
-                        
                         <tr>
-                            <td>Review</td>
-                            <td>{review.value}</td>
+                            <td>Gender</td>
+                            <td>{gender.value}</td>
+                        </tr>
+                        <tr>
+                            <td>Age</td>
+                            <td>{age.value}</td>
                         </tr>
                     </tbody>
                 </table>
