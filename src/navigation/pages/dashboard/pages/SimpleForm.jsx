@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-
-import Review from './Home/review';
-
-
 import ChatBot from 'react-simple-chatbot';
-import styled from 'styled-components'
+
 
 const  SimpleForm = () => {
     const steps = [

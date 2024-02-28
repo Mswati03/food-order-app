@@ -10,6 +10,7 @@ import { useState } from 'react';
 import './cart.css';
 import Payment from './app';
 import Header from './Header';
+import emailjs from '@emailjs/browser'
 
 import { useEffect } from 'react';
 import { Delete, Garage, Remove } from '@mui/icons-material';
@@ -52,6 +53,20 @@ const handleRemoveItem = (index) => {
     };
   };
   const itemsForPaypal = cart.map(formatProductToItem);
+
+ 
+  {/*emailjs
+  .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formdata, {
+    publicKey: 'YOUR_PUBLIC_KEY',
+  })
+  .then(
+    () => {
+      console.log('SUCCESS!');
+    },
+    (error) => {
+      console.log('FAILED...', error.text);
+    }
+  );*/}
  
   return (
     <CartProvider>

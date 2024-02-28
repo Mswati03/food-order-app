@@ -4,6 +4,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import React, { useState } from "react";
+import emailjs  from "@emailjs/browser";
 
 function PayPal({ items }) {
   const db= firebase.firestore();
@@ -64,6 +65,7 @@ function PayPal({ items }) {
    }).then(( docRef)=>{
     const docId= docRef.id;
     console.log(docId);
+   
 
    }).catch((error) => {
     console.error("Error adding order to Firestore: ", error);
